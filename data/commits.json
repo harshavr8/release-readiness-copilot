@@ -1,0 +1,42 @@
+[
+  {
+    "sha": "a1b2c3d",
+    "author": "harry",
+    "timestamp": "2026-09-15T09:12:00Z",
+    "message": "Refactor checkout total calculation to support discount stacking",
+    "files_changed": ["src/checkout/totals.py"],
+    "diff_summary": "Changed calculate_total() to apply discounts sequentially instead of taking the max single discount. Removed early-return for zero-discount carts."
+  },
+  {
+    "sha": "e4f5g6h",
+    "author": "harry",
+    "timestamp": "2026-09-15T11:40:00Z",
+    "message": "Add retry logic to payment gateway client",
+    "files_changed": ["src/payments/gateway_client.py"],
+    "diff_summary": "Wrapped charge_card() in a 3-attempt retry with exponential backoff on timeout errors only."
+  },
+  {
+    "sha": "i7j8k9l",
+    "author": "harry",
+    "timestamp": "2026-09-16T08:05:00Z",
+    "message": "Bump logging library version",
+    "files_changed": ["requirements.txt"],
+    "diff_summary": "Bumped structlog from 23.1.0 to 24.4.0. No code changes."
+  },
+  {
+    "sha": "m1n2o3p",
+    "author": "harry",
+    "timestamp": "2026-09-16T14:22:00Z",
+    "message": "Fix off-by-one in pagination for order history",
+    "files_changed": ["src/orders/history.py"],
+    "diff_summary": "Changed page slicing from [start:end] to [start:end+1] to include the last item on each page."
+  },
+  {
+    "sha": "q4r5s6t",
+    "author": "harry",
+    "timestamp": "2026-09-17T10:00:00Z",
+    "message": "Update CI runner image",
+    "files_changed": [".github/workflows/ci.yml"],
+    "diff_summary": "Switched test runner from ubuntu-20.04 to ubuntu-22.04 image."
+  }
+]

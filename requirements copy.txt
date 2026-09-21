@@ -1,0 +1,6 @@
+langgraph
+langchain
+langchain-anthropic
+mcp<2
+anthropic
+pydantic

@@ -1,0 +1,95 @@
+[
+  {
+    "run_id": "run-101",
+    "commit_sha": "a1b2c3d",
+    "timestamp": "2026-09-15T09:20:00Z",
+    "results": [
+      {
+        "test_name": "test_checkout.test_single_discount_applies",
+        "status": "passed"
+      },
+      {
+        "test_name": "test_checkout.test_stacked_discounts_total",
+        "status": "failed",
+        "error": "AssertionError: expected total=72.00, got total=68.40",
+        "history_last_10_runs": ["passed", "passed", "passed", "passed", "passed", "passed", "passed", "passed", "passed", "passed"]
+      },
+      {
+        "test_name": "test_checkout.test_zero_discount_cart",
+        "status": "failed",
+        "error": "KeyError: 'discount_total' not found in response",
+        "history_last_10_runs": ["passed", "passed", "passed", "passed", "passed", "passed", "passed", "passed", "passed", "passed"]
+      }
+    ]
+  },
+  {
+    "run_id": "run-102",
+    "commit_sha": "e4f5g6h",
+    "timestamp": "2026-09-15T11:50:00Z",
+    "results": [
+      {
+        "test_name": "test_payments.test_charge_card_success",
+        "status": "passed"
+      },
+      {
+        "test_name": "test_payments.test_charge_card_timeout_retries",
+        "status": "passed"
+      },
+      {
+        "test_name": "test_payments.test_gateway_response_time_under_2s",
+        "status": "failed",
+        "error": "AssertionError: response took 3.8s, expected < 2s",
+        "history_last_10_runs": ["passed", "failed", "passed", "passed", "failed", "passed", "passed", "passed", "failed", "passed"]
+      }
+    ]
+  },
+  {
+    "run_id": "run-103",
+    "commit_sha": "i7j8k9l",
+    "timestamp": "2026-09-16T08:10:00Z",
+    "results": [
+      {
+        "test_name": "test_logging.test_structured_log_format",
+        "status": "passed"
+      },
+      {
+        "test_name": "test_orders.test_order_history_pagination",
+        "status": "failed",
+        "error": "AssertionError: expected 10 items on page, got 9",
+        "history_last_10_runs": ["passed", "passed", "passed", "passed", "passed", "passed", "passed", "passed", "passed", "passed"]
+      }
+    ]
+  },
+  {
+    "run_id": "run-104",
+    "commit_sha": "m1n2o3p",
+    "timestamp": "2026-09-16T14:30:00Z",
+    "results": [
+      {
+        "test_name": "test_orders.test_order_history_pagination",
+        "status": "passed"
+      },
+      {
+        "test_name": "test_orders.test_last_page_includes_final_item",
+        "status": "passed"
+      }
+    ]
+  },
+  {
+    "run_id": "run-105",
+    "commit_sha": "q4r5s6t",
+    "timestamp": "2026-09-17T10:15:00Z",
+    "results": [
+      {
+        "test_name": "test_checkout.test_single_discount_applies",
+        "status": "passed"
+      },
+      {
+        "test_name": "test_payments.test_charge_card_success",
+        "status": "failed",
+        "error": "ConnectionError: DNS resolution failed for gateway.sandbox.local",
+        "history_last_10_runs": ["passed", "passed", "failed", "passed", "passed", "passed", "passed", "failed", "passed", "passed"]
+      }
+    ]
+  }
+]
