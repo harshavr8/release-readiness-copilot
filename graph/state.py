@@ -18,10 +18,15 @@ class FailureClassification(BaseModel):
     )
     confidence: float = Field(ge=0, le=1)
     reasoning: str = Field(description="One or two sentences citing the evidence used.")
+    revised: bool = Field(default=False, description="True if this came from the loop-back reclassification.")
 
 
 class ClassificationBatch(BaseModel):
     classifications: list[FailureClassification]
+
+
+CONFIDENCE_THRESHOLD = 0.75
+MAX_LOOPS = 1
 
 
 class CopilotState(TypedDict, total=False):
@@ -30,3 +35,4 @@ class CopilotState(TypedDict, total=False):
     classifications: list[FailureClassification]
     report: str
     mode: Optional[str]  # "llm" or "offline"
+    loop_count: int
