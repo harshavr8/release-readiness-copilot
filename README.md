@@ -50,6 +50,11 @@ python run.py                    # Claude classifies the failures
 ```
 Model defaults to `claude-sonnet-5`; override with `COPILOT_MODEL`.
 
+- `graph/report.py` — Day 10: turns classifications into a scored, structured report.
+  Risk score and go/no-go are a deterministic formula over the classifications, NOT
+  another LLM call - see `POINTS` and `_recommendation()` for the exact rule. Each run
+  saves both `reports/report-<timestamp>.json` (for tooling / CI gates) and
+  `reports/report-<timestamp>.md` (for the demo/screenshot).
+
 ## Not built yet
-- Structured JSON report + go/no-go recommendation, markdown/HTML render (Day 10)
 - Optional PyTorch pre-classifier (Day 11)

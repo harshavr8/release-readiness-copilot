@@ -33,6 +33,7 @@ class CopilotState(TypedDict, total=False):
     commits: list[dict]
     test_runs: list[dict]
     classifications: list[FailureClassification]
-    report: str
+    report: object  # ReleaseReport, set by build_report (see graph/report.py)
+    report_markdown: str
     mode: Optional[str]  # "llm" or "offline"
     loop_count: int

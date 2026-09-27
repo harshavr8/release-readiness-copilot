@@ -6,6 +6,7 @@ from graph.classifier import (
     reclassify_offline,
     reclassify_with_llm,
 )
+from graph.report import build_release_report, render_markdown
 from graph.mcp_client import call_tool
 from graph.state import CONFIDENCE_THRESHOLD, MAX_LOOPS, CopilotState, FailureClassification
 
@@ -87,22 +88,5 @@ def reclassify_failures(state: CopilotState) -> dict:
 def build_report(state: CopilotState) -> dict:
     """Node 4: plain-text report grouped by commit."""
     commits = sorted(state["commits"], key=lambda c: c["timestamp"])
-    by_sha: dict[str, list] = {}
-    for c in state.get("classifications", []):
-        by_sha.setdefault(c.commit_sha, []).append(c)
-
-    lines = ["RELEASE-READINESS REPORT", "=" * 24, f"mode: {state.get('mode')}", ""]
-    for commit in commits:
-        lines.append(f"[{commit['sha']}] {commit['message']}")
-        items = by_sha.get(commit["sha"], [])
-        if not items:
-            lines.append("    no failing tests")
-        for c in items:
-            flag = " [reconsidered after loop-back]" if c.revised else ""
-            lines.append(f"    {LABEL_TEXT[c.label]} ({c.confidence:.0%}){flag} - {c.test_name}")
-            lines.append(f"        {c.reasoning}")
-        lines.append("")
-
-    counts = {k: sum(1 for c in state.get("classifications", []) if c.label == k) for k in LABEL_TEXT}
-    lines.append("SUMMARY: " + ", ".join(f"{v} {LABEL_TEXT[k].lower()}" for k, v in counts.items()))
-    return {"report": "\n".join(lines)}
+    report = build_release_report(commits, state.get("classifications", []), state.get("mode", ""))
+    return {"report": report, "report_markdown": render_markdown(report)}

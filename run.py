@@ -22,11 +22,15 @@ async def main() -> None:
         raise SystemExit("ANTHROPIC_API_KEY not set. Set it, or run with --offline.")
 
     result = await build_graph().ainvoke({"mode": "offline" if args.offline else "llm"})
-    print(result["report"])
+    report = result["report"]
+    print(result["report_markdown"])
 
-    out = Path("reports") / f"report-{datetime.now():%Y%m%d-%H%M%S}.txt"
-    out.write_text(result["report"])
-    print(f"\nsaved to {out}")
+    stamp = f"{datetime.now():%Y%m%d-%H%M%S}"
+    json_path = Path("reports") / f"report-{stamp}.json"
+    md_path = Path("reports") / f"report-{stamp}.md"
+    json_path.write_text(report.model_dump_json(indent=2))
+    md_path.write_text(result["report_markdown"])
+    print(f"\nsaved to {json_path} and {md_path}")
 
 
 if __name__ == "__main__":
