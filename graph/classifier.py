@@ -53,7 +53,7 @@ def classify_with_llm(commits: list[dict], runs: list[dict]) -> list[FailureClas
     from langchain_anthropic import ChatAnthropic
 
     failures = _failures(commits, runs)
-    llm = ChatAnthropic(model=MODEL, temperature=0).with_structured_output(ClassificationBatch)
+    llm = ChatAnthropic(model=MODEL).with_structured_output(ClassificationBatch)
     batch = llm.invoke(
         [
             ("system", SYSTEM_PROMPT),
